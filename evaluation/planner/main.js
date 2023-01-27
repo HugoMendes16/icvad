@@ -12,9 +12,9 @@ const args = () => ({ a: randInt(0, 40), b: randInt(0, 40) })
 const generateTasks = (i) =>
   new Array(i).fill(1).map((_) => ({ type: taskType(), args: args() }))
 
-let workers = [
+let workers = [{ url: 'http://worker:8080', id: '0' },{ url: 'http://worker1:8081', id: '1' },{ url: 'http://worker2:8082', id: '2' }]
   // { url: 'http://localhost:8080', id: '' }
-]
+
 
 const app = express()
 app.use(express.json())
