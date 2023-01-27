@@ -26,7 +26,7 @@ const register = () =>
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ url: ADDRESS, id }),
+    body: JSON.stringify({ url: ADDRESS, id , MULT , ADD}),
   })
 let mult = false
 let add = false
@@ -86,7 +86,8 @@ app.get('/', (req, res) => {
   res.send('ready to work ' + id)
 })
 
+
 app.listen(port, () => {
-  // register()
+  register()
   console.log(`Worker ${id} listening at http://localhost:${port}`)
 })

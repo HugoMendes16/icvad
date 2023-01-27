@@ -12,9 +12,9 @@ const args = () => ({ a: randInt(0, 40), b: randInt(0, 40) })
 const generateTasks = (i) =>
   new Array(i).fill(1).map((_) => ({ type: taskType(), args: args() }))
 
-let workers = [{ url: 'http://worker:8080', id: '0', mult: true, add: false},{ url: 'http://worker1:8080', id: '1', mult: true, add: false},{ url: 'http://worker2:8080', id: '2', mult: false, add: true}]
+//let workers = [{ url: 'http://worker:8080', id: '0', mult: true, add: true},{ url: 'http://worker1:8080', id: '1', mult: true, add: true},{ url: 'http://worker2:8080', id: '2', mult: true, add: true}]
   // { url: 'http://localhost:8080', id: '' }
-
+let workers = []
 
 const app = express()
 app.use(express.json())
@@ -29,9 +29,12 @@ app.get('/', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-  const { url, id , mult , add } = req.body
-  console.log(`Register: adding ${url} worker: ${id} mult: ${mult} add: ${add}`)
-  workers.push({ url, id, mult, add })
+  const { url, id , MULT , ADD } = req.body
+  console.log(`Register: adding ${url} worker: ${id} mult: ${MULT} add: ${ADD}`)
+  //let findWorker = workers.find(w => w.id===id)
+  //if(!findWorker){
+  workers.push({ url, id, MULT, ADD })
+  //}
   res.send('ok')
 })
 
@@ -84,9 +87,9 @@ const wait = (mili) =>
 const sendTask = async (task) => {
   let worker = null;
   if (task.type === 'mult') {
-    worker = workers.find((w) => w.mult === true);
+    worker = workers.find((w) => w.MULT === true);
   } else if (task.type === 'add') {
-    worker = workers.find((w) => w.add === true);
+    worker = workers.find((w) => w.ADD === true);
   }
   if (!worker) {
     //console.error(`No worker available for task type ${task.type}`);
