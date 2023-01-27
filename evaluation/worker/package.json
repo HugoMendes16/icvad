@@ -8,5 +8,9 @@
     "express": "^4.17.1",
     "node-fetch": "2.6.1",
     "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "node main.js"
   }
+
 }
