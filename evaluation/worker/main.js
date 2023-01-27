@@ -2,6 +2,7 @@ require('dotenv').config()
 const fetch = require('node-fetch')
 const express = require('express')
 const { v4 } = require('uuid')
+const { json } = require('express')
 const id = v4()
 console.log(id)
 const PLANNER =
@@ -9,8 +10,8 @@ const PLANNER =
     ? process.env.PLANNER
     : 'http://localhost:3000'
 const MULT =
-  process.env.MULT !== undefined ? parseBoolean(process.env.MULT) : true
-const ADD = process.env.ADD !== undefined ? parseBoolean(process.env.ADD) : true
+  process.env.MULT !== undefined ? JSON.parse(process.env.MULT) : true
+const ADD = process.env.ADD !== undefined ? JSON.parse(process.env.ADD) : true
 const app = express()
 const port = process.env.PORT || 8080
 const ADDRESS =
